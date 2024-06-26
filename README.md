@@ -1,3 +1,4 @@
+# Task2Calculations Application
 **Task2Calculations Application**
 This application provides multiple calculations on a given number using concurrent threads in Java. It calculates various mathematical properties such as square, cube, prime number check, Armstrong number check, palindrome check, factorial, and number reversal.
 
