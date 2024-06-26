@@ -16,12 +16,19 @@ import assessment1.task.SquareTask;
 import java.util.Map;
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @RestController
 public class CalculationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CalculationController.class);
+
     @PostMapping("/performcalculation/{number}")
     public Map<String, Object> performCalculation(@PathVariable ("number") int number){
+
+        logger.info("Received calculation request for number: {}", number);
 
         Map<String, Object> resultMap = new LinkedHashMap<>();
 
@@ -68,6 +75,8 @@ public class CalculationController {
         resultMap.put("Reverse", reverseTask.getResult());
 
 
+        logger.info("Calculation completed for number: {}. Results: {}", number, resultMap);
+        
         return resultMap;
 
     }

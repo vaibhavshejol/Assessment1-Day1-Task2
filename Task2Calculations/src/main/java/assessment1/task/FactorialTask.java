@@ -1,6 +1,11 @@
 package assessment1.task;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class FactorialTask implements Runnable {
+
+    private static final Logger logger = LoggerFactory.getLogger(FactorialTask.class);
 
     private int number;
     private String result;
@@ -22,10 +27,12 @@ public class FactorialTask implements Runnable {
                 factorial = factorial * i;
             }
             result = "Factorial of " + number + " is " + factorial + ".";
-            System.err.println(result);
+            // System.err.println(result);
+            logger.info(result);
 
         } catch (Exception ex) {
-            System.out.println("Error is : " + ex);
+            // System.out.println("Error is : " + ex);
+            logger.error("Error occurred: {}", ex.getMessage());
         }
     }
 

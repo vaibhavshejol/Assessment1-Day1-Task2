@@ -1,6 +1,12 @@
 package assessment1.task;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ArmstrongOrNotTask implements Runnable {
+
+    private static final Logger logger = LoggerFactory.getLogger(ArmstrongOrNotTask.class);
+
 
     private int number;
     private String result;
@@ -25,16 +31,19 @@ public class ArmstrongOrNotTask implements Runnable {
 
             if (sum == originalNumber) {
                 result = originalNumber + " is an Armstrong number.";
-                System.out.println(result);
+                // System.out.println(result);
+                logger.info(result);
 
             } else {
                 result = originalNumber + " is not an Armstrong number.";
-                System.out.println(result);
+                // System.out.println(result);
+                logger.info(result);
 
             }
 
         } catch (Exception ex) {
-            System.out.println("Error is : " + ex);
+            // System.out.println("Error is : " + ex);
+            logger.error("Error occurred while processing number " + number, ex);
         }
     }
 

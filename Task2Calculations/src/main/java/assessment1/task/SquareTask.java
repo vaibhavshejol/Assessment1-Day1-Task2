@@ -1,6 +1,12 @@
 package assessment1.task;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SquareTask implements Runnable {
+
+    private static final Logger logger = LoggerFactory.getLogger(SquareTask.class);
+
 
     private int number;
     private String result;
@@ -14,10 +20,12 @@ public class SquareTask implements Runnable {
         try {
             int square = number * number;
             result = "Square of " + number + " is " + square;
-            System.out.println(result);
+            // System.out.println(result);
+            logger.info(result);
 
         } catch (Exception ex) {
-            System.out.println("Error is : " + ex);
+            // System.out.println("Error is : " + ex);
+            logger.error("Error occurred: {}", ex.getMessage());
         }
     }
 
