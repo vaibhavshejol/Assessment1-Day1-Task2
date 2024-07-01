@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "1cf62240-dd8a-4fb4-be72-9a45b593710e",
+		"name": "CalculationTask2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36209248"
+	},
+	"item": [
+		{
+			"name": "performCalculation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/performcalculation/321",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"performcalculation",
+						"321"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
