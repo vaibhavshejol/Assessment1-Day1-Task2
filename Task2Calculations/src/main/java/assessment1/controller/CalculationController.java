@@ -1,20 +1,13 @@
 package assessment1.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import assessment1.task.ArmstrongOrNotTask;
-import assessment1.task.CubeTask;
-import assessment1.task.EvenOddTask;
-import assessment1.task.FactorialTask;
-import assessment1.task.PalimdromeOrNotTask;
-import assessment1.task.PrimeOrNotTask;
-import assessment1.task.ReverseTask;
-import assessment1.task.SquareTask;
+import assessment1.service.CalculationService;
 
 import java.util.Map;
-import java.util.LinkedHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,71 +18,24 @@ public class CalculationController {
 
     private static final Logger logger = LoggerFactory.getLogger(CalculationController.class);
 
+    @Autowired
+    CalculationService calculationService;
+
     @PostMapping("/performcalculation/{number}")
     public Map<String, Object> performCalculation(@PathVariable ("number") int number){
 
         logger.info("Received calculation request for number: {}", number);
 
-        Map<String, Object> resultMap = new LinkedHashMap<>();
-
-        SquareTask squareTask=new SquareTask(number);
-        Thread squreThread=new Thread(squareTask);
-
-        CubeTask cubeTask=new CubeTask(number);
-        Thread cubThread=new Thread(cubeTask);
-
-        EvenOddTask evenOddTask=new EvenOddTask(number);
-        Thread evenoddThread=new Thread(evenOddTask);
-
-        PrimeOrNotTask primeOrNotTask=new PrimeOrNotTask(number);
-        Thread primeThread=new Thread(primeOrNotTask);
-
-        ArmstrongOrNotTask armstrongOrNotTask=new ArmstrongOrNotTask(number);
-        Thread armstrongThread=new Thread(armstrongOrNotTask);
-
-        PalimdromeOrNotTask palimdromeOrNotTask=new PalimdromeOrNotTask(number);
-        Thread palimdromeThread=new Thread(palimdromeOrNotTask);
-
-        FactorialTask factorialTask=new FactorialTask(number);
-        Thread factorialThread=new Thread(factorialTask);
-
-        ReverseTask reverseTask=new ReverseTask(number);
-        Thread reverseThread=new Thread(reverseTask);
-
-        squreThread.start();
-        cubThread.start();
-        evenoddThread.start();
-        primeThread.start();
-        armstrongThread.start();
-        palimdromeThread.start();
-        factorialThread.start();
-        reverseThread.start();
+        Map<String, Object> resultMap=null;
 
         try {
-            // Join threads to wait for completion
-            squreThread.join();
-            cubThread.join();
-            evenoddThread.join();
-            primeThread.join();
-            armstrongThread.join();
-            palimdromeThread.join();
-            factorialThread.join();
-            reverseThread.join();
-        } catch (InterruptedException e) {
-            logger.error("Thread interrupted while waiting for calculation tasks to complete", e);
-            Thread.currentThread().interrupt();
+            resultMap=calculationService.performCalculation(number);
+            logger.info("Calculation tasks started for number: {}", number);
+        } catch (Exception ex) {
+            logger.error("Exception occurred while performing calculations for number {}: {}", number, ex.getMessage());
         }
 
-        resultMap.put("Squre", squareTask.getResult());
-        resultMap.put("Cube", cubeTask.getResult());
-        resultMap.put("EvenOrOdd", evenOddTask.getResult());
-        resultMap.put("PrimeOrNot", primeOrNotTask.getResult());
-        resultMap.put("ArmstrongOrNot", armstrongOrNotTask.getResult());
-        resultMap.put("PalimdromOrNot", palimdromeOrNotTask.getResult());
-        resultMap.put("Factorial", factorialTask.getResult());
-        resultMap.put("Reverse", reverseTask.getResult());
-
-
+        
         logger.info("Calculation completed for number: {}. Results: {}", number, resultMap);
         
         return resultMap;
