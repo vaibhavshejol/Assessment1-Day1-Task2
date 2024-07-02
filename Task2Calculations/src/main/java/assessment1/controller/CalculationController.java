@@ -56,14 +56,29 @@ public class CalculationController {
         ReverseTask reverseTask=new ReverseTask(number);
         Thread reverseThread=new Thread(reverseTask);
 
-        squreThread.run();
-        cubThread.run();
-        evenoddThread.run();
-        primeThread.run();
-        armstrongThread.run();
-        palimdromeThread.run();
-        factorialThread.run();
-        reverseThread.run();
+        squreThread.start();
+        cubThread.start();
+        evenoddThread.start();
+        primeThread.start();
+        armstrongThread.start();
+        palimdromeThread.start();
+        factorialThread.start();
+        reverseThread.start();
+
+        try {
+            // Join threads to wait for completion
+            squreThread.join();
+            cubThread.join();
+            evenoddThread.join();
+            primeThread.join();
+            armstrongThread.join();
+            palimdromeThread.join();
+            factorialThread.join();
+            reverseThread.join();
+        } catch (InterruptedException e) {
+            logger.error("Thread interrupted while waiting for calculation tasks to complete", e);
+            Thread.currentThread().interrupt();
+        }
 
         resultMap.put("Squre", squareTask.getResult());
         resultMap.put("Cube", cubeTask.getResult());
