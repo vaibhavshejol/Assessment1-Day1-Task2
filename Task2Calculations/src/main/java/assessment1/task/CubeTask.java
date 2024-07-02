@@ -3,6 +3,7 @@ package assessment1.task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//implementing runnable interface
 public class CubeTask implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(CubeTask.class);

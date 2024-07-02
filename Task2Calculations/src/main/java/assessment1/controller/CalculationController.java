@@ -21,14 +21,17 @@ public class CalculationController {
     @Autowired
     CalculationService calculationService;
 
+    //API for perform calculation on a number
     @PostMapping("/performcalculation/{number}")
     public Map<String, Object> performCalculation(@PathVariable ("number") int number){
 
         logger.info("Received calculation request for number: {}", number);
 
+        //Created a map reference for return a result
         Map<String, Object> resultMap=null;
 
         try {
+            //calling to performCalculation method along with a number
             resultMap=calculationService.performCalculation(number);
             logger.info("Calculation tasks started for number: {}", number);
         } catch (Exception ex) {

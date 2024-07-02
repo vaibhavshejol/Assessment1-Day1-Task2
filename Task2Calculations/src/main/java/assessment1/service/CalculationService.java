@@ -22,8 +22,11 @@ public class CalculationService {
     
     public Map<String, Object> performCalculation(int number){
 
+        //Created a map referece to store results
         Map<String, Object> resultMap = new LinkedHashMap<>();
 
+        //Here we created object of related task
+        //and passed that object as parameter in contructor of Thread class
         SquareTask squareTask=new SquareTask(number);
         Thread squreThread=new Thread(squareTask);
 
@@ -48,6 +51,7 @@ public class CalculationService {
         ReverseTask reverseTask=new ReverseTask(number);
         Thread reverseThread=new Thread(reverseTask);
 
+        //Here we call start method of Thread class and it will call internally run method
         squreThread.start();
         cubThread.start();
         evenoddThread.start();
@@ -72,6 +76,7 @@ public class CalculationService {
             Thread.currentThread().interrupt();
         }
 
+        //Here we collecting data or retrieving data
         resultMap.put("Squre", squareTask.getResult());
         resultMap.put("Cube", cubeTask.getResult());
         resultMap.put("EvenOrOdd", evenOddTask.getResult());

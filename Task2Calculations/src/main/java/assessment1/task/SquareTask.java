@@ -3,6 +3,7 @@ package assessment1.task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//implementing runnable interface
 public class SquareTask implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(SquareTask.class);
